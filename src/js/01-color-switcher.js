@@ -7,6 +7,9 @@ function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
 
+startBtn.addEventListener('click', startBgChangeColor);
+stopBtn.addEventListener('click', stopBgChangeColor);
+
 function startBgChangeColor() {
   timerId = setInterval(() => {
     document.body.style.backgroundColor = getRandomHexColor();
@@ -20,5 +23,3 @@ function stopBgChangeColor() {
   startBtn.disabled = false;
   stopBtn.disabled = true;
 }
-startBtn.addEventListener('click', startBgChangeColor);
-stopBtn.addEventListener('click', stopBgChangeColor);
