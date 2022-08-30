@@ -20,11 +20,11 @@ refs.startBtn.addEventListener('click', onStartBtnClick);
 function onStartBtnClick() {
   const timer = setInterval(() => {
     refs.startBtn.disabled = true;
-    let countdown = new Date(refs.dateTimePicker.value) - new Date();
+    const deltaTime = new Date(refs.dateTimePicker.value) - Date.now();
 
-    if (countdown >= 0) {
+    if (deltaTime >= 0) {
       refs.dateTimePicker.disabled = true;
-      const { days, hours, minutes, seconds } = convertMs(countdown);
+      const { days, hours, minutes, seconds } = convertMs(deltaTime);
       refs.timer.days.textContent = addLeadingZero(days);
       refs.timer.hours.textContent = addLeadingZero(hours);
       refs.timer.min.textContent = addLeadingZero(minutes);
