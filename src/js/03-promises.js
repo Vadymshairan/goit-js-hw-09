@@ -13,7 +13,7 @@ function onBtnClick(e) {
   // console.log(inputDelay);
   const inputStep = Number(step.value);
   // console.log(inputStep);
-  for (let index = 1; index < amount.value; index++) {
+  for (let index = 0; index <= amount.value; index += 1) {
     createPromise(index, inputDelay);
     inputDelay += inputStep;
   }
@@ -21,7 +21,7 @@ function onBtnClick(e) {
 
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
-  return new Promise((resolve, reject) => {
+  new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldResolve) {
         // Fulfill
@@ -43,5 +43,3 @@ function createPromise(position, delay) {
       });
     });
 }
-
-function name(params) {}
