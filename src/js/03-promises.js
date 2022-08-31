@@ -13,7 +13,7 @@ function onBtnClick(e) {
   // console.log(inputDelay);
   const inputStep = Number(step.value);
   // console.log(inputStep);
-  for (let index = 0; index <= amount.value; index += 1) {
+  for (let index = 1; index <= amount.value; index += 1) {
     createPromise(index, inputDelay);
     inputDelay += inputStep;
   }
