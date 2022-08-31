@@ -17,8 +17,9 @@ const refs = {
 refs.startBtn.disabled = true;
 
 refs.startBtn.addEventListener('click', onStartBtnClick);
+
 function onStartBtnClick() {
-  const timer = setInterval(() => {
+  intervalId = setInterval(() => {
     refs.startBtn.disabled = true;
     const deltaTime = new Date(refs.dateTimePicker.value) - Date.now();
 
@@ -29,13 +30,12 @@ function onStartBtnClick() {
       refs.timer.hours.textContent = addLeadingZero(hours);
       refs.timer.min.textContent = addLeadingZero(minutes);
       refs.timer.sec.textContent = addLeadingZero(seconds);
-      // console.log(addLeadingZero(days));
     } else {
       Notify.success('end of countdown', {
         position: 'center-center',
       });
       refs.dateTimePicker.disabled = false;
-      clearInterval(timer);
+      clearInterval(intervalId);
     }
   }, 1000);
 }
