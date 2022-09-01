@@ -6,22 +6,31 @@ formRef.addEventListener('submit', onBtnClick);
 
 function onBtnClick(e) {
   e.preventDefault();
-  // console.log(e.currentTarget.delay.value);
+
   const { delay, step, amount } = e.currentTarget;
-  // console.log(delay.value);
   let inputDelay = Number(delay.value);
-  // console.log(inputDelay);
   const inputStep = Number(step.value);
-  // console.log(inputStep);
+
   for (let index = 1; index <= amount.value; index += 1) {
-    createPromise(index, inputDelay);
+    const promise = createPromise(index, inputDelay);
     inputDelay += inputStep;
+    promise
+      .then(({ position, delay }) => {
+        Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`, {
+          position: 'center-center',
+        });
+      })
+      .catch(({ position, delay }) => {
+        Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`, {
+          position: 'center-center',
+        });
+      });
   }
 }
 
 function createPromise(position, delay) {
   const shouldResolve = Math.random() > 0.3;
-  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (shouldResolve) {
         // Fulfill
@@ -31,15 +40,5 @@ function createPromise(position, delay) {
         reject({ position, delay });
       }
     }, delay);
-  })
-    .then(({ position, delay }) => {
-      Notify.success(`✅ Fulfilled promise ${position} in ${delay}ms`, {
-        position: 'center-center',
-      });
-    })
-    .catch(({ position, delay }) => {
-      Notify.failure(`❌ Rejected promise ${position} in ${delay}ms`, {
-        position: 'center-center',
-      });
-    });
+  });
 }

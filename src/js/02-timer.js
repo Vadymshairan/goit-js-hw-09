@@ -1,6 +1,7 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+let intervalId = null;
 
 const refs = {
   dateTimePicker: document.querySelector('#datetime-picker'),
@@ -19,8 +20,8 @@ refs.startBtn.disabled = true;
 refs.startBtn.addEventListener('click', onStartBtnClick);
 
 function onStartBtnClick() {
+  refs.startBtn.disabled = true;
   intervalId = setInterval(() => {
-    refs.startBtn.disabled = true;
     const deltaTime = new Date(refs.dateTimePicker.value) - Date.now();
 
     if (deltaTime >= 0) {
